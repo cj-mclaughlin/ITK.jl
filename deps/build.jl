@@ -4,19 +4,17 @@ using BinaryProvider
 const verbose = "--verbose" in ARGS
 const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr")))
 
-libpath = joinpath(@__DIR__, "usr/darknet-master")
+libpath = joinpath(@__DIR__, "usr")
 
 products = Product[
-    LibraryProduct(libpath,"libitk", :libdarknet)
+    LibraryProduct(libpath,["libJuliaCxx"], :libJuliaCxx)
     ]
 
 # Download binaries from hosted location
-bin_prefix = "https://github.com/ianshmean/bins/raw/master/3rdparty/Darknet"
+bin_prefix = "https://github.com/cj-mclaughlin/ITK.jl/releases/download/5.0.1-initial"
 
 download_info = Dict(
-    Linux(:x86_64)  => ("$bin_prefix/darknet-AlexeyAB-YOLOv3-Ubuntu18.04-CPU-only.tar.gz", "bfa6ae50c5613fb0e8b71a884fce7fea92bb8e736674d64931e0c1fc3121251d"),
-    MacOS(:x86_64)  => ("$bin_prefix/darknet-AlexeyAB-YOLOv3-MacOS.10.14.3-CPU-only.tar.gz", "c9d79e1918c785149d39920608b4efb22fc910895ab6baf9aa5f7f43169a37fe"),
-    #MacOS(:x86_64)  => ("$bin_prefix/arcbasic.tar.gz", "06803eab8c89ec7c1bf39796ea448217614362b8a51a6c82eaf286be1574ba4d")
+    Linux(:x86_64)  => ("$bin_prefix/JuliaITKv0.tar.gz", "bfa6ae50c5613fb0e8b71a884fce7fea92bb8e736674d64931e0c1fc3121251d"),
 )
 # First, check to see if we're all satisfied
 @show satisfied(products[1]; verbose=true)
