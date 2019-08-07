@@ -7,14 +7,14 @@ const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__
 libpath = joinpath(@__DIR__, "usr")
 
 products = Product[
-    LibraryProduct(libpath,["libJuliaCxx"], :libJuliaCxx)
+    LibraryProduct(libpath,["libitk"], :libitk)
     ]
 
 # Download binaries from hosted location
 bin_prefix = "https://github.com/cj-mclaughlin/ITK.jl/releases/download/5.0.1-initial"
 
 download_info = Dict(
-    Linux(:x86_64)  => ("$bin_prefix/JuliaITKv0.tar.gz", "bfa6ae50c5613fb0e8b71a884fce7fea92bb8e736674d64931e0c1fc3121251d"),
+    Linux(:x86_64)  => ("$bin_prefix/JuliaITKv0.tar.gz", "6af21035adafe90260964cef837041287d033f765d4d90b231c96239dc9ddda"),
 )
 # First, check to see if we're all satisfied
 @show satisfied(products[1]; verbose=true)
