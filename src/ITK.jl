@@ -8,11 +8,11 @@ using Cxx, Libdl
 include("init.jl")
 
 function __init__()
-    loadcxx(libitk, pathof(libitk))
+    loadcxx(libitk, dirname(libitk))
 end
 
 # Loads shared library and header file
-function loadcxx(libpath::String=libitk, headerdir::String=pathof(libitk))
+function loadcxx(libpath::String=libitk, headerdir::String=dirname(libitk))
     addHeaderDir(headerdir, kind=C_System)
     Libdl.dlopen(libpath, Libdl.RTLD_GLOBAL)
     cxxinclude("JuliaWrap.h")
