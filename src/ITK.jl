@@ -5,6 +5,8 @@ using Cxx, Libdl
 #    error("ITK not properly installed. Run `] build ITK`, restart Julia and try again")
 #end
 
+include("init.jl")
+
 function __init__()
     loadcxx(libitk, pathof(libitk))
 end
@@ -31,5 +33,7 @@ function registerframe(fixedImage::String, movingImage::String, outputImage::Str
     x, y, metric = unsafe_load(result,1), unsafe_load(result,2), unsafe_load(result,3)
     return x, y, metric
 end
+
+export registerframe
 
 end # module ITK
