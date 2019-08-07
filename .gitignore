@@ -4,3 +4,8 @@
 .DS_Store
 /Manifest.toml
 /dev/
+deps/deps.jl
+deps/build.log
+deps/usr/downloads
+deps/usr/ITK
+deps/usr/manifests
