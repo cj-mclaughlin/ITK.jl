@@ -30,13 +30,15 @@ end
 # outputImage -> String path of desired output image file (can be blank if writeImage=false)
 # writeImage -> Boolean, whether or not to save resulting registered image. Default=true.
 # optimizer -> String, "Gradient" | "Amoeba". Default="Gradient"
+# Return: (x translation, y translation, metric info)
 function registerframe(fixedImage::String, movingImage::String, outputImage::String, writeImage::Bool=true, optimizer::String="Gradient")
+    register_gradient_optimizer(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool) = @cxx test_registration1(fix, moving, output, write)
+    register_amoeba_optimizer(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool) = @cxx test_registration1(fix, moving, output, write)
     if optimizer == "Amoeba"
-        register_frame(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool) = @cxx test_registration1(fix, moving, output, write)
+        result = register_amoeba_optimizer(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage)
     else
-        register_frame(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool) = @cxx test_registration2(fix, moving, output, write)
+        result = register_gradient_optimizer(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage)
     end
-    result = register_frame(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage)
     x, y, metric = unsafe_load(result,1), unsafe_load(result,2), unsafe_load(result,3)
     return x, y, metric
 end
