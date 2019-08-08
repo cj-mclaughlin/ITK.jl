@@ -2,7 +2,7 @@
 const depsjl_path = joinpath(@__DIR__, "..", "deps", "deps.jl")
 if !isfile(depsjl_path)
     println("Deps path: $depsjl_path")
-    error("FFMPEG not installed properly, run `] build FFMPEG`, restart Julia and try again")
+    error("ITK not installed properly, run `] build ITK`, restart Julia and try again")
 end
 
 include(depsjl_path)

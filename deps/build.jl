@@ -14,10 +14,9 @@ products = Product[
 bin_prefix = "https://github.com/cj-mclaughlin/ITK.jl/releases/download/5.0.1-initial"
 
 download_info = Dict(
-    Linux(:x86_64)  => ("$bin_prefix/JuliaITKv0.tar.gz", "6af21035adafe90260964c3f8370410287d033f765d4d90b231c96239dc9ddda"),
-
-
+    Linux(:x86_64)  => ("$bin_prefix/JuliaITKv0.tar.gz", "b3346dd8db0c7313ded899521d58bf645f7f9037654c6de484dee7d9a89e6a97"),
 )
+
 # First, check to see if we're all satisfied
 @show satisfied(products[1]; verbose=true)
 if any(!satisfied(p; verbose=false) for p in products)

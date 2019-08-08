@@ -25,11 +25,13 @@ function verifycxx(x::Int)
 end
 
 # Initial registration test method - performs translation registration with MattesMutualInformation Metric and Amoeba Optimizer.
-# Takes in paths to a fixed and moving image, as well as the location to save the resulting image.
-# Also returns a double array containing the x and y translation information, as well as the metric value generated.
-function registerframe(fixedImage::String, movingImage::String, outputImage::String)
-    register_frame(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}) = @cxx test_registration(fix, moving, output)
-    result = register_frame(pointer(fixedImage), pointer(movingImage), pointer(outputImage))
+# fixedImage -> String path of fixed image file
+# movingImage -> String path of moving image file
+# outputImage -> String path of desired output image file (can be blank if writeImage=false)
+# writeImage -> Boolean, whether or not to save resulting registered image. Default=true.
+function registerframe(fixedImage::String, movingImage::String, outputImage::String, writeImage::Bool=true)
+    register_frame(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool) = @cxx test_registration(fix, moving, output, write)
+    result = register_frame(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage)
     x, y, metric = unsafe_load(result,1), unsafe_load(result,2), unsafe_load(result,3)
     return x, y, metric
 end
