@@ -32,8 +32,8 @@ end
 # optimizer -> String, "Gradient" | "Amoeba". Default="Gradient"
 # Return: (x translation, y translation, metric info)
 function registerframe(fixedImage::String, movingImage::String, outputImage::String, writeImage::Bool=true, optimizer::String="Gradient")
-    register_gradient_optimizer(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool) = @cxx test_registration1(fix, moving, output, write)
     register_amoeba_optimizer(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool) = @cxx test_registration1(fix, moving, output, write)
+    register_gradient_optimizer(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool) = @cxx test_registration2(fix, moving, output, write)
     if optimizer == "Amoeba"
         result = register_amoeba_optimizer(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage)
     else
