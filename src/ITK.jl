@@ -52,8 +52,8 @@ end
 # minStepLength -> Recommended values [0.05], higher values result in quicker but less stable registration
 # maxIterations -> Recommended values [100:200], threshold number of iterations before returning translation
 # relaxationFactor -> Recommended values [~0.5], factor used to slow down shifts between iterations, higher values result in quicker but potentially divergent registration
-function MMIGradientRegistration(fixedImage::String, movingImage::String, outputImage::String, writeImage::Bool, learningRate::Float, minStepLength::Float, maxIterations::Int, relaxationFactor::Float)
-    register(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool, LR::Float, minStep::Float, maxIter::Int, relaxFactor::Float) = @cxx experimental(fix, moving, output, write, LR, minStep, maxIter, relaxFactor)
+function MMIGradientRegistration(fixedImage::String, movingImage::String, outputImage::String, writeImage::Bool, learningRate::Float32, minStepLength::Float32, maxIterations::Int, relaxationFactor::Float32)
+    register(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool, LR::Float32, minStep::Float32, maxIter::Int32, relaxFactor::Float32) = @cxx experimental(fix, moving, output, write, LR, minStep, maxIter, relaxFactor)
     result = register(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage, learningRate, minStep, maxIter, relaxFactor)
     x, y, metric = unsafe_load(result, 1), unsafe_load(result, 2), unsafe_load(result, 3)
     return x, y, metric
