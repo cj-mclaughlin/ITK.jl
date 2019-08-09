@@ -2,16 +2,8 @@
 language: julia
 os:
   - linux
-addons:
-    apt:
-        packages:
-           - cmake
-           - cmake-data
-           - gfortran
-           - libblas-dev
-           - liblapack-dev
-           - libgmp-dev
-           - libmpfr-dev
+dist:
+  bionic
 julia:
   - 1.0
   - 1.1
