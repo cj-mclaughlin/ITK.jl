@@ -43,6 +43,23 @@ function registerframe(fixedImage::String, movingImage::String, outputImage::Str
     return x, y, metric
 end
 
+# Another registration method using MattesMutualInformation metric, with Gradient Descent optimizer with specified parameters.
+# fixedImage -> String path of fixed image file
+# movingImage -> String path of moving image file
+# outputImage -> String path of desired output image file (can be blank if writeImage=false)
+# writeImage -> Boolean, whether or not to save resulting registered image. 
+# learningRate -> Recommended values [1:5], higher values result in quicker but less stable registration
+# minStepLength -> Recommended values [0.05], higher values result in quicker but less stable registration
+# maxIterations -> Recommended values [100:200], threshold number of iterations before returning translation
+# relaxationFactor -> Recommended values [~0.5], factor used to slow down shifts between iterations, higher values result in quicker but potentially divergent registration
+function MMIGradientRegistration(fixedImage::String, movingImage::String, outputImage::String, writeImage::Bool, learningRate::Float, minStepLength::Float, maxIterations::Int, relaxationFactor::Float)
+    register(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool, LR::Float, minStep::Float, maxIter::Int, relaxFactor::Float) = @cxx experimental(fix, moving, output, write, LR, minStep, maxIter, relaxFactor)
+    result = register(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage, learningRate, minStep, maxIter, relaxFactor)
+    x, y, metric = unsafe_load(result, 1), unsafe_load(result, 2), unsafe_load(result, 3)
+    return x, y, metric
+end
+
 export registerframe
+export MMIGradientRegistration
 
 end # module ITK

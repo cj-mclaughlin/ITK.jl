@@ -14,3 +14,6 @@ There is currently one working image registration function, which performs trans
 
 ## Docs
 Currently unavailable. For now, see comments on source wrappers at src/ITK.jl.
+
+## Build Issues
+Currently working on Ubuntu 18.04. Looking to compile for backwards and multi-platform in the future.

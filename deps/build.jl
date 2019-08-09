@@ -14,7 +14,7 @@ products = Product[
 bin_prefix = "https://github.com/cj-mclaughlin/ITK.jl/releases/download/5.0.1-initial"
 
 download_info = Dict(
-    Linux(:x86_64)  => ("$bin_prefix/JuliaITKv0.tar.gz", "db9cb4fd9538589ca7cb10c3a1b3df8eb0fcd2a0dd58ec358b71613fd8bed149"),
+    Linux(:x86_64)  => ("$bin_prefix/JuliaITKv0.tar.gz", "edf7fbd8d05edb43661e3a993051251d5b6e26e060bbb76409138d925ea0f4dc"),
 )
 
 # First, check to see if we're all satisfied
