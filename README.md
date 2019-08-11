@@ -10,10 +10,10 @@ using ITK
 ```
 
 ## Current Development Notes
-There is currently one working image registration function, which performs translation registration with Mattes Mutual Information metric, and either an Amoeba optimizer or a Gradient Descent optimizer. I am currently working on a more parameterized set registration functions, as well as the ability to register images saved in memory as Julia arrays, as opposed to only images saved to disk.
+There is currently four parameterized translation registration functions, and two simple test registration functions. Currently working on an option to pass in Julia image arrays, as opposed to only passing in paths to images saved on disk. If there are any specific functions that you would like ported to Julia, feel free to message me directly or write up an issue.
 
 ## Docs
 Currently unavailable. For now, see comments on source wrappers at src/ITK.jl.
 
 ## Build Issues
-Currently working on Ubuntu 18.04. Looking to compile for backwards and multi-platform in the future.
+Currently working on Ubuntu 18.04. Looking to compile backwards and multi-platform in the future.
