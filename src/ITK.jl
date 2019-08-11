@@ -63,7 +63,11 @@ end
 # fixedImage -> String path of fixed image file
 # movingImage -> String path of moving image file
 # outputImage -> String path of desired output image file (can be blank if writeImage=false)
-# writeImage -> Boolean, whether or not to save resulting registered image. 
+# writeImage -> Boolean, whether or not to save resulting registered image.
+# initialSimplex -> Recommended values [5.0], initial size of simplex moving over cost surface 
+# pixelTolerance -> Optimizer convergence tolerance, pixels
+# metricTolerance -> Optimizer function convergence tolerance, bits
+# maxIterations -> maximum number of iterations
 function MMIAmoebaRegistration(fixedImage::String, movingImage::String, outputImage::String, writeImage::Bool, initialSimplex::Float64, pixelTolerance::Float64, metricTolerance::Float64, maxIterations::Int64)
     register(fix::Ptr{UInt8}, moving::Ptr{UInt8}, output::Ptr{UInt8}, write::Bool, simplex::Float64, pixelT::Float64, metricT::Float64, maxIter::Int64) = @cxx MMIAmoebaTranslation(fix, moving, output, write, simplex, pixelT, metricT, maxIter)
     result = register(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage, initialSimplex, pixelTolerance, metricTolerance, maxIterations)
@@ -81,6 +85,7 @@ function MMIOnePlusOneRegistration(fixedImage::String, movingImage::String, outp
     result = register(pointer(fixedImage), pointer(movingImage), pointer(outputImage), writeImage, initialSimplex, pixelTolerance, metricTolerance, maxIterations)
     x, y, metric = unsafe_load(result, 1), unsafe_load(result, 2), unsafe_load(result, 3)
     return x, y, metric
+end
 
 # Another registration method using Mean Squares metric, with Gradient Descent optimizer with specified parameters.
 # fixedImage -> String path of fixed image file
