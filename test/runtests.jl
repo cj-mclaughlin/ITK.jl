@@ -9,7 +9,7 @@ end
 
 @testset "Registration Control Check" begin
     testimage_path = string(joinpath(dirname(dirname(pathof(TestImages)))), "/images")
-    lighthouse_path = joinpath(testimg_path, "lighthouse.png")
+    lighthouse_path = joinpath(testimage_path, "lighthouse.png")
 
     testreg1 = ITK.registerframe(lighthouse_path, lighthouse_path, "NA", false, "Amoeba")
     testreg2 = ITK.registerframe(lighthouse_path, lighthouse_path, "NA", false, "Gradient")
