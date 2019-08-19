@@ -8,7 +8,7 @@ using TestImages
     @test ITK.verifycxx(100) == 100
 end
 
-Simple registration check on still image
+# Simple registration check on still image
 @testset "Registration Control Check" begin
     testimage_path = string(joinpath(dirname(dirname(pathof(TestImages)))), "/images")
     lighthouse_path = joinpath(testimage_path, "lighthouse.png")
